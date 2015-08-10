@@ -1,10 +1,12 @@
 package SurveySimulator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class SimulationDriver {
 
@@ -14,39 +16,43 @@ public class SimulationDriver {
 		List<Vote> voteList = new ArrayList();
 		Random ran = new Random();
 		
-		Question question1 = new MultipleChoice(123, "description", new String[] {"1","2"});
+		Question question1 = new MultipleChoice(123, "description", new String[] {"a","b","c"});
 		
 		
-		int numStudents = ran.nextInt(100) + 100;
+		//int numStudents = ran.nextInt(20) + 10;
+		int numStudents = 20;
 		
 		for (int i = 0; i < numStudents; i++) {
 			studentList.add(new Student(i));
 			
-		}
-		
-		System.out.println(ran.nextInt(2));
-		//studentList.get(0).newVote(question1);
-		
-		
-		int numVotes = ran.nextInt(numStudents);
-		int randomStudent;
-		
-		for (int i = 0; i < numVotes; i++) {
-			
-			studentList.get(ran.nextInt(numStudents));
-			
-		}
-			
-		
+		}	
+
 		Service s = new IVoteService(question1);
 		
 		
+		//int numVotes = ran.nextInt(numStudents + 1);  //0 to all the students actually vote
+		int numVotes = 15;
+		
+		for (int i = 0; i < numVotes; i++) {		
+			s.addAnswer(studentList.get(ran.nextInt(numStudents)).newRandomVote(question1));
+			
+		}
+			
 		
 		
+		List<Vote> voteList2 = s.getResult();
 		
+		System.out.println(numStudents);
+		System.out.println("size: " + voteList2.size());
 		
+
+		for (Vote v : voteList2)
+			System.out.println(v);
 		
+		s.displayResult();
 		
 	}
+	
+	
 
 }

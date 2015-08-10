@@ -8,6 +8,12 @@ public class SingleChoice implements Question {
 		return null;
 	}
 
+	@Override
+	public String getQuestionDetail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

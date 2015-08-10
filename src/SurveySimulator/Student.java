@@ -1,8 +1,10 @@
 package SurveySimulator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class Student {
 	
@@ -17,12 +19,11 @@ public class Student {
 		return id;
 	}
 	
-	public Vote newRandomVote(Question question) {
-		
+	public Vote newRandomVote(Question question) {	
 
 		
 		Random ran = new Random();		
-		List<String> answer = new ArrayList<String>();			
+		Set<String> answer = new HashSet<String>();			
 		String [] choices = question.possibleAnswers();
 		
 		

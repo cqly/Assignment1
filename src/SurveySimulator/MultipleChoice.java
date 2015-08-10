@@ -16,6 +16,10 @@ public class MultipleChoice implements Question {
 	public int getId() {
 		return id;
 	}
+	
+	public String getQuestionDetail() {
+		return description;
+	}
 		
 
 	@Override
