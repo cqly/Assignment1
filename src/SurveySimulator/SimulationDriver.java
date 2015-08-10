@@ -12,7 +12,7 @@ public class SimulationDriver {
 	public static void main(String[] args) {
 
 		
-		int randNumStudent = ran.nextInt(20) + 10;
+		int randNumStudent = ran.nextInt(101) + 100;
 		generateStudents(randNumStudent);
 		
 		Question question1 = new MultipleChoice(123, "description", new String[] {"a","b","c"});
@@ -20,7 +20,7 @@ public class SimulationDriver {
 		Question question3 = new SingleChoice(123, "single", new String[] {"a","b","c"});
 		Question question4 = new SingleChoice(123, "single", new String[] {"a","b","c"});
 
-		Service s = new IVoteService(question1);
+		Service s = new IVoteService(question2);
 		
 		startVoteProcess(s);
 				
@@ -50,8 +50,4 @@ public class SimulationDriver {
 		}
 	}
 	
-	
-	
-	
-
 }

@@ -1,6 +1,5 @@
 package SurveySimulator;
 
-import java.util.List;
 import java.util.Set;
 
 public class Vote implements Comparable<Vote> {
