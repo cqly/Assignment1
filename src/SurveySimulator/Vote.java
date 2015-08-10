@@ -39,7 +39,7 @@ public class Vote implements Comparable<Vote> {
 	}
 	
 	public String toString() {
-		return student.getId() + ": " + answer.toString();
+		return "ID " + student.getId() + ": " + answer.toString();
 	}
 
 	@Override

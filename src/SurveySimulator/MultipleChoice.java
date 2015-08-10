@@ -17,16 +17,18 @@ public class MultipleChoice implements Question {
 		return id;
 	}
 	
+	public String toString() {
+		return "[Multiple Choices]\n - Question: " + description;
+	}
+	
 	public String getQuestionDetail() {
 		return description;
-	}
-		
+	}		
 
 	@Override
 	public String[] possibleAnswers() {
 		return choices;
 	}
-
 
 
 }

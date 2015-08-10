@@ -1,57 +1,56 @@
 package SurveySimulator;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class SimulationDriver {
-
+	
+	private static Random ran = new Random();
+	private static List<Student> studentList;
+	
 	public static void main(String[] args) {
 
-		List<Student> studentList = new ArrayList();
-		List<Vote> voteList = new ArrayList();
-		Random ran = new Random();
+		
+		int randNumStudent = ran.nextInt(20) + 10;
+		generateStudents(randNumStudent);
 		
 		Question question1 = new MultipleChoice(123, "description", new String[] {"a","b","c"});
-		
-		
-		//int numStudents = ran.nextInt(20) + 10;
-		int numStudents = 20;
-		
-		for (int i = 0; i < numStudents; i++) {
-			studentList.add(new Student(i));
-			
-		}	
+		Question question2 = new SingleChoice(123, "single", new String[] {"a","b","c"});
+		Question question3 = new SingleChoice(123, "single", new String[] {"a","b","c"});
+		Question question4 = new SingleChoice(123, "single", new String[] {"a","b","c"});
 
 		Service s = new IVoteService(question1);
 		
+		startVoteProcess(s);
+				
+		s.displayResult();
+	}
+	
+	private static void generateStudents(int numStudents) {
 		
-		//int numVotes = ran.nextInt(numStudents + 1);  //0 to all the students actually vote
-		int numVotes = 15;
+		studentList = new ArrayList<Student>();
+					
+		for (int i = 0; i < numStudents; i++) {
+			studentList.add(new Student(i));
+		}
 		
-		for (int i = 0; i < numVotes; i++) {		
-			s.addAnswer(studentList.get(ran.nextInt(numStudents)).newRandomVote(question1));
+		System.out.println("There are " + numStudents + " students in class.\n");
+	}
+	
+	private static void startVoteProcess(Service s) {
+		
+		Vote v;
+		int numVotes = ran.nextInt(studentList.size() + 1);  //0 to all the students actually vote
+		
+		for (int i = 0; i < numVotes; i++) {
+			v = studentList.get(ran.nextInt(studentList.size())).newRandomVote(s.getQuestion());
+			s.addAnswer(v);
 			
 		}
-			
-		
-		
-		List<Vote> voteList2 = s.getResult();
-		
-		System.out.println(numStudents);
-		System.out.println("size: " + voteList2.size());
-		
-
-		for (Vote v : voteList2)
-			System.out.println(v);
-		
-		s.displayResult();
-		
 	}
+	
+	
 	
 	
 

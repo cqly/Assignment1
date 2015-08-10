@@ -2,18 +2,30 @@ package SurveySimulator;
 
 public class SingleChoice implements Question {
 
+	private int id;
+	private String description;
+	private String[] choices;
+	
+	public SingleChoice(int id, String description, String[] choices) {
+		this.id = id;
+		this.description = description;
+		this.choices = choices;
+	}
+		
+	public int getId() {
+		return id;
+	}
+	
+	public String toString() {
+		return "[Single Choice] Question: " + description;
+	}
+	
+	public String getQuestionDetail() {
+		return description;
+	}		
+
 	@Override
 	public String[] possibleAnswers() {
-		// TODO Auto-generated method stub
-		return null;
+		return choices;
 	}
-
-	@Override
-	public String getQuestionDetail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
 }
