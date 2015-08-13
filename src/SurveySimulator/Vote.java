@@ -2,6 +2,13 @@ package SurveySimulator;
 
 import java.util.Set;
 
+/**
+ * The class Vote represent a vote by student. Its private fields contain
+ * the Student object, Question object, and a set of answers for that Question.
+ * It also implements the Comparable class to compare the student's ID of two
+ * votes to see if they are from the same student.
+ *
+ */
 public class Vote implements Comparable<Vote> {
 
 	private Student student;
@@ -12,9 +19,6 @@ public class Vote implements Comparable<Vote> {
 		this.student = student;
 		this.question = question;
 		this.answer = answer;
-		
-		
-		
 	}
 	
 	public Student getStudent() {
@@ -33,8 +37,6 @@ public class Vote implements Comparable<Vote> {
 		
 		Vote other = (Vote) obj;
 		return this.student.getId() == other.getStudent().getId();
-		
-		
 	}
 	
 	public String toString() {

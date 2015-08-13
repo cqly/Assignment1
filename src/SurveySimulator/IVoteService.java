@@ -5,12 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is the main simulator for the voting system. It keeps track of all the
+ * votes to a specific Question and has functionality to calculate some statistic and
+ * display the results.
+ *
+ */
 public class IVoteService implements Service {
 	
 	private Question question;
 	private List<Vote> voteList;
-	private Map<String,Integer> answersCount = new HashMap<String,Integer>();
 	private int totalVotes = 0;
+	
+	/**
+	 * the map is used to keep track of the answers count where the key is the answer
+	 * and the value is how many times that answer is chosen. 
+	 */
+	private Map<String,Integer> answersCount = new HashMap<String,Integer>();
+	
 	
 	public IVoteService(Question question) {
 		this.question = question;
@@ -20,14 +32,24 @@ public class IVoteService implements Service {
 		}
 	}
 	
+	private double getPercent(int value) {
+		if (totalVotes == 0) 
+			return 0;
+		else
+			return value * 100.0 / totalVotes;
+	}
+	
+	@Override
 	public Question getQuestion() {
 		return question;
 	}
 	
+	@Override
 	public List<Vote> getResult() {
 		return voteList;
 	}
 	
+	@Override
 	public void displayResult() {
 		
 		System.out.println(question);		
@@ -45,15 +67,14 @@ public class IVoteService implements Service {
 			System.out.println("   " + v);
 	}
 	
-	private double getPercent(int value) {
-		if (totalVotes == 0) 
-			return 0;
-		else
-			return value * 100.0 / totalVotes;
-	}
+	
 
+	/** 
+	 * Add a Vote to the list of Vote in the service. If there are previous Vote from
+	 * the same Student, remove that Vote and all its statistic before adding a new Vote
+	 */
 	@Override
-	public void addAnswer(Vote studentVote) {
+	public void addVote(Vote studentVote) {
 		
 		//If the student has already voted, remove his old vote
 		if (voteList.contains(studentVote)) {			
@@ -65,8 +86,7 @@ public class IVoteService implements Service {
 			
 			voteList.remove(studentVote);
 		}
-			
-		
+					
 		voteList.add(studentVote);
 		
 		for (String answer : studentVote.getAnswer()) {
